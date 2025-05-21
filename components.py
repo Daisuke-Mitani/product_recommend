@@ -69,6 +69,13 @@ def display_product(result):
             価格：{product['price']}
     """)
 
+    # 在庫状況によるメッセージ表示
+    if 'stock_status' in product:
+        if product['stock_status'] == '残りわずか':
+            st.warning(f"{ct.WARNING_ICON} ご好評につき、在庫数が残りわずかです。購入をご希望の場合、お早めのご注文をおすすめいたします。")
+        elif product['stock_status'] == 'なし':
+            st.error(f"{ct.ERROR_ICON} 申し訳ございませんが、本商品は在庫切れとなっております。入荷までもうしばらくお待ちください。")
+
     # 「商品カテゴリ」と「メーカー」と「ユーザー評価」
     st.code(f"""
         商品カテゴリ：{product['category']}\n
